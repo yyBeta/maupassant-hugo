@@ -2,9 +2,24 @@
     <div class="container">
         &copy; 2018 <a rel="nofollow" href="{{ .Site.BaseURL | absURL }}">{{ .Site.Title }}</a>.
         Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
-        <a rel="nofollow noreferer noopener" href="https://github.com/JokerQyou/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/JokerQyou/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/JokerQyou/maupassant-hugo">maupassant</a>.
     </div>
 </footer>
+
+<!--mathjax-->
+{{- if and (or .Params.mathjax (and .Site.Params.mathjax (ne .Params.mathjax false))) (or .IsPage .IsHome) }}
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      {{ if or .Params.mathjaxEnableAutoNumber (and .Site.Params.mathjaxEnableAutoNumber (ne .Params.mathjaxEnableAutoNumber false)) -}}
+        TeX: {equationNumbers: {autoNumber: "AMS"}},
+      {{ end -}}
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+{{- end }}
 
 {{ if .IsPage }}
 <script type="text/javascript" src="{{ "js/prism.js" | relURL}}" async="true"></script>
